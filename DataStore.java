@@ -26,7 +26,7 @@ public class DataStore
             try {
                 fs = new Scanner(sectionFile);
                 for (int i=0; i<sections.length; i++) {
-                    sections[i] = new CourseSection(fs.next(), fs.next(), fs.next(), fs.next(), fs.next(), fs.next(), fs.next(), fs.next());
+                    sections[i] = new CourseSection(fs.next(), fs.next(), fs.next(), fs.next(), fs.next(), fs.next(), fs.next());
                 }
             } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());
