@@ -1,27 +1,21 @@
-//instantiate our address class to be accessed in the test class
-
-public class Address
-{
-    //initialize private variables so they cant be accessed in test class
+public class Address {
     private String street;
     private String city;
     private String state;
-    private String Zip;
+    private String zipCode;
 
-    public Address ()
-    {
+
+    public Address(){
 
     }
-
-    //constructor
-    public Address(String street, String city, String state, String zip) {
+    public Address(String street, String city, String state, String zipCode) {
         this.street = street;
         this.city = city;
         this.state = state;
-        Zip = zip;
+        this.zipCode = zipCode;
     }
 
-    //instantiate all of our getters and setters for our variables
+    // Getters and Setters
     public String getStreet() {
         return street;
     }
@@ -46,21 +40,22 @@ public class Address
         this.state = state;
     }
 
-    public String getZip() {
-        return Zip;
+        public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip(String zip) {
-        Zip = zip;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
-    //our override toString
     @Override
     public String toString() {
         return
-                "Street: " + street + '\n' +
-                "City: " + city + '\n' +
-                "State: " + state + '\n' +
-                "Zip: " + Zip + '\n';
+                '\n' +
+                        "Street: " + street + '\n' +
+                        "City: " + city + '\n' +
+                        "State: " + state + '\n' +
+                        "Zip: " + zipCode + '\n';
     }
-}
+
+    }
