@@ -86,10 +86,10 @@ public class TestClass
 
         //user zip
         System.out.println("Enter Your Zip Code: ");
-        ad2.setZip(userinput.nextLine());
+        ad2.setZipCode(userinput.nextLine());
 
         //checks if it doesnt match any actual number or if its empty
-        while (ad2.getZip().matches("") || !ad2.getZip().matches(".*\\d.*"))
+        while (ad2.getZipCode().matches("") || !ad2.getZipCode().matches(".*\\d.*"))
         {
             System.out.println("Please Enter a Zip: ");
             ad2.setState(userinput.nextLine());
@@ -113,8 +113,8 @@ public class TestClass
         System.out.println("0). Finished" + '\n');
         String classEnroll = "";
 
-        //while class enroll isnt 'quit' execute as follows
-        while (classEnroll != "quit") {
+        //while class enroll isn't 'quit' execute as follows
+        while (!classEnroll.equals("quit")) {
 
             System.out.println("Please enter a number based on the above classes to enroll in to a max of 5, Press '0' to finish: ");
             classEnroll = userinput.next();
@@ -127,7 +127,7 @@ public class TestClass
             }
             //if not 0, create a new course section, and pull field from the myMenu array according to result - 1, since array starts at zero and zero is used to quit.
             else {
-                CourseSection sec = new CourseSection(myMenu[result - 1].getSubject(), myMenu[result - 1].getNumber(), myMenu[result - 1].getName(), myMenu[result - 1].getId(), myMenu[result - 1].getDays(), myMenu[result - 1].getStartTime(), myMenu[result - 1].getBuilding(), myMenu[result - 1].getRoom());
+                CourseSection sec = new CourseSection(myMenu[result - 1].getCourseId(), myMenu[result - 1].getCourseName(), myMenu[result - 1].getCourseId(), myMenu[result - 1].getDays(), myMenu[result - 1].getStartTime(), myMenu[result - 1].getBuilding(), myMenu[result - 1].getRoom());
                //once the course selection is made, try to enroll student.
                 try {
                     student1.addCourse(sec);
