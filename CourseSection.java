@@ -1,42 +1,62 @@
-public class CourseSection extends Course
-{
-    private String id;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CourseSection extends Course implements Section {
+    private String sectionId;
     private String days;
     private String startTime;
     private String building;
     private String room;
+    private List<Student> enrolledStudents;
 
-    public CourseSection () {
+
+    public CourseSection(){
 
     }
 
-    public CourseSection (String subject, String number, String name,
-                         String id, String days, String startTime, String building,
-                         String room) {
-        super(subject, number, name);
-        this.id = id;
+
+    public CourseSection(String courseId, String courseName, String sectionId, String days, String startTime, String building, String room) {
+        super(courseId, courseName); // Calls the constructor of the parent class (Course)
+        this.sectionId = sectionId;
         this.days = days;
         this.startTime = startTime;
         this.building = building;
         this.room = room;
+        this.enrolledStudents = new ArrayList<>();
     }
 
-    public CourseSection(Course c, String id, String days, String startTime, String building, String room) {
-        this.id = id;
-        this.days = days;
-        this.startTime = startTime;
-        this.building = building;
-        this.room = room;
+
+
+    @Override
+    public String getSectionId() {
+        return sectionId;
     }
 
-    public String getId() {
-        return id;
+    public void setSectionId(String sectionId) {
+        this.sectionId = sectionId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    @Override
+    public Course getCourse() {
+        return this;
     }
 
+    @Override
+    public List<Student> getEnrolledStudents() {
+        return enrolledStudents;
+    }
+
+    @Override
+    public void enrollStudent(Student student) {
+        enrolledStudents.add(student);
+    }
+
+    @Override
+    public void removeStudent(Student student) {
+        enrolledStudents.remove(student);
+    }
+
+    // Additional getters and setters for other properties
     public String getDays() {
         return days;
     }
@@ -71,12 +91,14 @@ public class CourseSection extends Course
 
     @Override
     public String toString() {
-        return
-                super.toString() +
-                " " + id +
-                " " + days +
-                " " + startTime +
-                " " + building +
-                " " + room;
+        return "CourseSection{" +
+                "courseId='" + getCourseId() + '\'' +
+                ", courseName='" + getCourseName() + '\'' +
+                ", sectionId='" + sectionId + '\'' +
+                ", days='" + days + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", building='" + building + '\'' +
+                ", room='" + room + '\'' +
+                '}';
     }
 }
