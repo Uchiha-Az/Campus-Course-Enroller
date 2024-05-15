@@ -5,7 +5,7 @@ import java.util.Date;
 public class Student extends Person
 {
     private String id;
-    private CourseSection [] sections = new CourseSection[5];
+    private CourseSection [] sections = new CourseSection[4];
     private int numberEnrolled;
 
     //default constructor
@@ -35,8 +35,7 @@ public class Student extends Person
         try {
             for (int i=0; i<numberEnrolled; i++)
             {
-                if (sections[i].getSubject().equals(cs.getSubject()) &&
-                        sections[i].getNumber().equals(cs.getNumber()))
+                if (sections[i].getCourseName().equals(cs.getCourseName()) )
                 {
                     throw new DuplicateException("Duplicate Classes Enrolled!: ", cs);
                 }
