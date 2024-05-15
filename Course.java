@@ -1,50 +1,30 @@
-public class Course
-{
-    private String subject;
-    private String number;
-    private String name;
+public class Course {
+    private String courseId;
+    private String courseName;
 
-    public Course() {
+    public Course(){
 
     }
 
-    public Course(String subject, String number, String name) {
-        this.subject = subject;
-        this.number = number;
-        this.name = name;
+    public Course(String courseId, String courseName) {
+        this.courseId = courseId;
+        this.courseName = courseName;
     }
 
-    public String getSubject() {
-        return subject;
+    // Getters and Setters
+    public String getCourseId() {
+        return courseId;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
-    public String getNumber() {
-        return number;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return
-                '\n'+ subject +
-                " " + number +
-                " " + name;
-
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }
-
