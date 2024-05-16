@@ -4,6 +4,7 @@ public class SeondTest {
         testDecoratorPattern();
         testAdapterPattern();
         testObserverPattern();
+        testStrategyPattern();
     }
 
 
@@ -112,6 +113,66 @@ public class SeondTest {
         System.out.println("Notification for student 2143980: Room changed to: Room 303");
         System.out.println("Notification for student 2040849: Room changed to: Room 303");
 
+    }
+
+
+
+
+
+
+
+    private static void testStrategyPattern() throws DuplicateException, CourseException {
+        System.out.println("\nTesting Strategy Pattern:");
+
+        // Create a CourseSection object
+        System.out.println("\n");
+        CourseSection courseSection = new CourseSection("CSC103", "Algorithms", "FJT03", "MWF", "9AM", "Building D", "Room 404");
+
+        // Set different enrollment strategies and test them
+        EnrollmentStrategy standardStrategy = new StandardEnrollmentStrategy();
+        EnrollmentStrategy priorityStrategy = new PriorityEnrollmentStrategy();
+
+        // Create student objects
+        Student student1 = new Student("2143980");
+        student1.setFirstName("Abdulaziz");
+        student1.setLastName("Alshamrani");
+
+        Student student2 = new Student("2040849");
+        student2.setFirstName("Faris");
+        student2.setLastName("Alshamrani");
+
+        Student student3 = new Student("1003");
+        student3.setFirstName("Ahmad");
+        student3.setLastName("Saadi");
+
+
+        // Use the standard strategy
+        courseSection.setEnrollmentStrategy(standardStrategy);
+        courseSection.enrollStudent(student1);
+        courseSection.enrollStudent(student2);
+        courseSection.enrollStudent(student3);
+
+        // Output enrolled students using standard strategy
+        System.out.println("Enrolled students with Standard Strategy:");
+        for (Student student : courseSection.getEnrolledStudents()) {
+            System.out.println(student.getFirstName() + " " + student.getLastName());
+        }
+        System.out.println();
+
+        // Use the priority strategy
+        courseSection = new CourseSection("CSC103", "Algorithms", "FJT03", "MWF", "9AM", "Building D", "Room 404");
+        courseSection.setEnrollmentStrategy(priorityStrategy);
+        courseSection.enrollStudent(student1);
+        courseSection.enrollStudent(student2);
+        courseSection.enrollStudent(student3);
+
+
+        // Output enrolled students using priority strategy
+        System.out.println("Enrolled students with Priority Strategy:");
+        for (Student student : courseSection.getEnrolledStudents()) {
+            System.out.println(student.getFirstName() + " " + student.getLastName());
+        }
+        System.out.println();
     }
 
 
