@@ -1,13 +1,32 @@
 public class SeondTest {
 
     public static void main(String[] args) throws DuplicateException, CourseException {
+        testFactoryMethodPattern();
         testDecoratorPattern();
         testAdapterPattern();
         testObserverPattern();
         testStrategyPattern();
+
     }
 
 
+    private static void testFactoryMethodPattern() {
+        System.out.println("Testing Factory Method Pattern:");
+
+        // Create instances of factory creators
+        CourseSectionCreator lectureCreator = new LectureCourseSectionCreator();
+        CourseSectionCreator labCreator = new LabCourseSectionCreator();
+
+        // Create course sections using the factory methods
+        CourseSection lectureSection = lectureCreator.createCourseSection("CSC101", "Introduction to Computer Science", "FJT01", "MWF", "10AM", "Building A", "Room 101");
+        CourseSection labSection = labCreator.createCourseSection("CSC101", "Introduction to Computer Science Lab", "LAB01", "TTH", "2PM", "Building B", "Room 102");
+
+        // Print the created course sections
+        System.out.println("Created Lecture Section: " + lectureSection);
+        System.out.println("Expected: CourseSection{courseId='CSC101', courseName='Introduction to Computer Science', sectionId='FJT01', days='MWF', startTime='10AM', building='Building A', room='Room 101'}");
+        System.out.println("Created Lab Section: " + labSection);
+        System.out.println("Expected: CourseSection{courseId='CSC101', courseName='Introduction to Computer Science Lab', sectionId='LAB01', days='TTH', startTime='2PM', building='Building B', room='Room 102'}\n");
+    }
 
 
     private static void testDecoratorPattern() throws DuplicateException, CourseException {
