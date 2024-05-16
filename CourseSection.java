@@ -1,17 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseSection extends Course implements Section {
+public class CourseSection extends Course implements Section, Subject {
     private String sectionId;
     private String days;
     private String startTime;
     private String building;
     private String room;
     private List<Student> enrolledStudents;
+    private List<Observer> observers;
 
 
     public CourseSection(){
-
+        super("", "");
+        this.sectionId = "";
+        this.days = "";
+        this.startTime = "";
+        this.building = "";
+        this.room = "";
+        this.enrolledStudents = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
 
@@ -23,6 +31,7 @@ public class CourseSection extends Course implements Section {
         this.building = building;
         this.room = room;
         this.enrolledStudents = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
 
@@ -34,7 +43,9 @@ public class CourseSection extends Course implements Section {
 
     public void setSectionId(String sectionId) {
         this.sectionId = sectionId;
+        notifyObservers("Section ID changed to: " + sectionId);
     }
+
 
     @Override
     public Course getCourse() {
@@ -49,13 +60,14 @@ public class CourseSection extends Course implements Section {
     @Override
     public void enrollStudent(Student student) {
         enrolledStudents.add(student);
+        notifyObservers("New student enrolled: " + student.getFirstName() + " " + student.getLastName());
     }
 
     @Override
     public void removeStudent(Student student) {
         enrolledStudents.remove(student);
+        notifyObservers("Student removed: " + student.getFirstName() + " " + student.getLastName());
     }
-
     // Additional getters and setters for other properties
     public String getDays() {
         return days;
@@ -79,6 +91,7 @@ public class CourseSection extends Course implements Section {
 
     public void setBuilding(String building) {
         this.building = building;
+        notifyObservers("Building changed to: " + building);
     }
 
     public String getRoom() {
@@ -87,6 +100,7 @@ public class CourseSection extends Course implements Section {
 
     public void setRoom(String room) {
         this.room = room;
+        notifyObservers("Room changed to: " + room);
     }
 
     @Override
@@ -100,5 +114,24 @@ public class CourseSection extends Course implements Section {
                 ", building='" + building + '\'' +
                 ", room='" + room + '\'' +
                 '}';
+    }
+
+
+    // Observer methods
+    @Override
+    public void attach(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void detach(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(String message) {
+        for (Observer observer : observers) {
+            observer.update(message);
+        }
     }
 }
