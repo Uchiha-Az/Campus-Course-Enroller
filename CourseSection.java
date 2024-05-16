@@ -9,7 +9,7 @@ public class CourseSection extends Course implements Section, Subject {
     private String room;
     private List<Student> enrolledStudents;
     private List<Observer> observers;
-
+    private EnrollmentStrategy enrollmentStrategy;
 
     public CourseSection(){
         super("", "");
@@ -20,6 +20,8 @@ public class CourseSection extends Course implements Section, Subject {
         this.room = "";
         this.enrolledStudents = new ArrayList<>();
         this.observers = new ArrayList<>();
+        this.enrollmentStrategy = new StandardEnrollmentStrategy();
+
     }
 
 
@@ -32,6 +34,7 @@ public class CourseSection extends Course implements Section, Subject {
         this.room = room;
         this.enrolledStudents = new ArrayList<>();
         this.observers = new ArrayList<>();
+        this.enrollmentStrategy = new StandardEnrollmentStrategy();
     }
 
 
@@ -57,11 +60,19 @@ public class CourseSection extends Course implements Section, Subject {
         return enrolledStudents;
     }
 
-    @Override
     public void enrollStudent(Student student) {
-        enrolledStudents.add(student);
-        notifyObservers("New student enrolled: " + student.getFirstName() + " " + student.getLastName());
+        try {
+            enrollmentStrategy.enrollStudent(this, student);
+        } catch (DuplicateException | CourseException e) {
+            e.printStackTrace(); // Handle exceptions appropriately
+        }
     }
+
+
+    public void setEnrollmentStrategy(EnrollmentStrategy enrollmentStrategy) {
+        this.enrollmentStrategy = enrollmentStrategy;
+    }
+
 
     @Override
     public void removeStudent(Student student) {
